@@ -1,0 +1,13 @@
+(defun my-but-last (arr)
+  (if (cdr arr)
+      (if (cdr (cdr arr))
+          (my-but-last (cdr arr))
+          arr)
+      nil))
+
+(my-but-last '(1 2 3 4))
+(my-but-last '(1 2 3 nil))
+(my-but-last '(1 2 nil 3))
+(my-but-last '(2 3 nil 4 5))
+(my-but-last '(1))
+(my-but-last nil)
