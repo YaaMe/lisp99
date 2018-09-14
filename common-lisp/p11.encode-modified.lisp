@@ -2,6 +2,7 @@
 (defun encode-modified (lista)
   (if lista
       (if (listp (car lista))
+          ; or use let
           (multiple-value-bind (n ele) (values-list (car lista))
             (if (eql ele (second lista))
                 (encode-modified (cons (list (+ n 1) ele) (nthcdr 2 lista)))
