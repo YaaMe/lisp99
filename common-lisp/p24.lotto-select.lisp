@@ -1,4 +1,11 @@
-; O(n^2)
+(defun lotto-select (k n)
+  (rnd-select (range n) k))
+
+(defun range (n)
+  (if (> n 1)
+      (cons n (range (- n 1)))
+      (list 1)))
+
 (defun rnd-select (lista n)
   (if (> n 1)
       (let ((listb (shuffle-to-head lista (random (length lista)))))
@@ -10,6 +17,4 @@
       (shuffle-to-head (append (cdr lista) (list (car lista))) (- n 1))
       lista))
 
-(shuffle-to-head '(1 2 3 4 5 6) 3)
-
-(rnd-select '(a b c d e f g h) 3)
+(lotto-select 6 49)

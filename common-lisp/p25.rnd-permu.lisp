@@ -1,4 +1,6 @@
-; O(n^2)
+(defun rnd-permu (lista)
+  (rnd-select lista (length lista)))
+
 (defun rnd-select (lista n)
   (if (> n 1)
       (let ((listb (shuffle-to-head lista (random (length lista)))))
@@ -10,6 +12,4 @@
       (shuffle-to-head (append (cdr lista) (list (car lista))) (- n 1))
       lista))
 
-(shuffle-to-head '(1 2 3 4 5 6) 3)
-
-(rnd-select '(a b c d e f g h) 3)
+(rnd-permu '(a b c d e f))

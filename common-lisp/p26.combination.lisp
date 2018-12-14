@@ -1,0 +1,1 @@
+(defun combination (n lista))
