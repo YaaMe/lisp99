@@ -1,21 +1,21 @@
 (defun combination (n lista)
   (if (> n 1)
-      (group n lista lista)
+      (combinate-n n lista lista)
       (if (car lista)
           (cons (list (car lista)) (combination n (cdr lista))))))
 
 ;; Cartesian
-(defun group (n lista listb)
+(defun combinate-n (n lista listb)
   (append
    ;; discuss every row
    (if (> (- n 1) (length (to-list (car lista))))
        ;; member not enough
-       (group n (invite (car lista) (cdr listb) n) (cdr listb))
+       (combinate-n n (invite (car lista) (cdr listb) n) (cdr listb))
        ;; member enough
        (invite (car lista) (cdr listb) n))
    ;; go next
    (if (and (cdr lista) (> (+ (length (to-list (car lista))) (length (cdr listb))) n))
-       (group n (cdr lista) (cdr listb)))))
+       (combinate-n n (cdr lista) (cdr listb)))))
 
 (defun invite (ele lista n)
   (if (and (cdr lista) (> (+ (length (to-list ele)) (length (to-list lista))) n))
