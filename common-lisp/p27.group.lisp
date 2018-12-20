@@ -1,4 +1,6 @@
 ;; a
+(defun group3 (lista)
+  (group lista '(2 3 4)))
 
 ;; b
 (defun group (lista sizes)
