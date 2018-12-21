@@ -17,10 +17,25 @@
 (lsort '((a b c) (d e) (f g h) (d e) (i j k l) (m n) (o)))
 
 ;; b
-(defun lfsort (lista))
+(defun lfsort (lista)
+  (unzip-packages (discuss-lsort (pack-list lista nil) nil)))
 
-;;(defun to-be-choas (lista choas)
-;;  (if (car lista)
-;;      (if (eql (length lista) (length (car (car choas))))
-;;          (append () (to-be-choas (cdr lista) )))
-;;      choas))
+(defun unzip-packages (packages)
+  (append (car packages) (if (cdr packages) (unzip-packages (cdr packages)))))
+
+(defun pack-list (lista packages)
+  (if (car lista)
+      (pack-list (cdr lista) (pack-item (car lista) (length (car lista)) packages))
+      packages))
+
+(defun pack-item (item n packages)
+  (if (car packages)
+      (if (eql n (length (car (car packages))))
+          (cons (append (car packages) (list item)) (cdr packages))
+          (cons (car packages) (pack-item item n (cdr packages))))
+      (list (list item))))
+
+(pack-item '(A B) 2 (list (list '(1)) (list '(1 2) '(3 4)) (list '(1 2 3))))
+(pack-item '(A B) 2 (list (list '(1)) (list '(1 2 3))))
+(pack-list '((a b c) (d e) (f g h) (d e) (i j k l) (m n) (o)) nil)
+(lfsort '((a b c) (d e) (f g h) (d e) (i j k l) (m n) (o)))
