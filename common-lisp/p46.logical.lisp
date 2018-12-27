@@ -20,21 +20,17 @@
   (not (xor/2 a b)))
 
 (defun wrap-t (v)
-  (if v "true" "false"))
+  (if v 'true 'fail))
 
-(defun print-line (a b v)
-  (format t "~A ~A ~A ~%" (wrap-t a) (wrap-t b) (wrap-t (eval `(,v ,a ,b)))))
+(defun table (a b v)
+  (format t "~A ~A ~A ~%" (wrap-t a) (wrap-t b) (wrap-t (eval `(let ((a ,a) (b ,b)) ,v)))))
 
-(defun table (v)
-  (progn
-    (print-line T T v)
-    (print-line T nil v)
-    (print-line nil T v)
-    (print-line nil nil v)))
+(defun table-all (v)
+  (format t "~A ~A ~A ~%" 'A 'B v)
+  (table T T v)
+  (table T nil v)
+  (table nil T v)
+  (table nil nil v))
 
-
-(defun loop-table (v)
-  (if (car v)
-      (progn (format t "~A ~%" (car v)) (table (car v)) (loop-table (cdr v)))))
-
-(loop-table '(and/2 or/2 nand/2 nor/2 xor/2 impl/2 xnor/2))
+(table-all '(and A (or A B)))
+(table-all '(and/2 A (or/2 A B)))
